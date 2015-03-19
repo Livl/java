@@ -1,9 +1,9 @@
-package skaner;
+package skaner.java;
 
 // string.charAt(i)
 
 public class Skaner {
-    
+    //obliczanie wielkosci tablicy
     public static int iloscliczb(String str){
         char[] strchar=str.toCharArray();
         int ilosc=1;
@@ -18,9 +18,8 @@ public class Skaner {
         char[] dzialania=new char[iloscliczb(str)-1];
         int[] liczby=new int [iloscliczb(str)];
         int wynik=0;
-        
+        //segregacja wyrazenia
         for(int i=0, nr=0, nrd=0; i<strchar.length; i++){
-            System.out.println("i=" + i + "  nr=" + nr);
             if(strchar[i]=='+'){
                 dzialania[nrd]='+';
                 nrd++;
@@ -43,32 +42,29 @@ public class Skaner {
                 
                 liczby[nr] = Integer.parseInt(tmp);
                 nr++;
-                
-                System.out.println(liczby[0]+" "+liczby[1]);
             }              
         } 
-        
-        for (int i=0;i<dzialania.length;i++){
-            System.out.println(liczby[0]+" "+liczby[1]);
-            for (int j=0;j<liczby.length-1;j+=2){
-                if(dzialania[i]=='+'){
-                    //return liczby[i]+liczby[i+1];
-                    wynik = liczby[j]+liczby[j+1];
-                    System.out.println("w "+wynik);
-                    }
-                else if(dzialania[i]=='-')
-                    return liczby[j]-liczby[j+1];
-                    //wynik += liczby[i]-liczby[i+1];
-                
+        //obliczanie
+        for (int i=0;i<liczby.length-1;i++){
+            if(i==0){
+                if(dzialania[i]=='+')
+                    wynik+=liczby[i]+liczby[i+1];
+                else if (dzialania[i]=='-')
+                    wynik+=liczby[i]-liczby[i+1];
             }
+            else{
+                if(dzialania[i]=='+')
+                    wynik+=liczby[i+1];
+                else if (dzialania[i]=='-')
+                    wynik-=liczby[i+1];
+            }
+         
         }
         return wynik;
     }
     
     public static void main(String[] args) {
-        // TODO code application logic here
-        Integer result = sprawdz("1+91");
-        System.out.println(result);
-        //System.out.println(result == 0);         
+        Integer result = sprawdz("91-91+4+5+111");
+        System.out.println(result);       
     }
 }
